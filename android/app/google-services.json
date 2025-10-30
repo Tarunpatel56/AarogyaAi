@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "120899676261",
+    "project_id": "aarogy-3055d",
+    "storage_bucket": "aarogy-3055d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120899676261:android:796d0b6dcb4778e5b4fe8c",
+        "android_client_info": {
+          "package_name": "com.example.aarogya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120899676261-cef1prvtrseid9seo6do20uivrla8ach.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aarogya",
+            "certificate_hash": "3d2bee3430b8c3f9cc27cc7392c608094dc5d5c4"
+          }
+        },
+        {
+          "client_id": "120899676261-1m4vphrn4v5cu28ibn7c424ns4ncdqgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm04dduxtAEAkQNOicDs9Vk69HcjVmo6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120899676261-1m4vphrn4v5cu28ibn7c424ns4ncdqgh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "120899676261-nic0vorqftj0u8pjf7t5kf6hbibvkqbo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aarogya"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
