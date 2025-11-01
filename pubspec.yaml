@@ -40,6 +40,10 @@ dependencies:
   awesome_bottom_bar: ^1.2.4
   animated_botton_navigation: ^0.0.8
   awesome_drawer_bar: ^1.2.1
+  get_storage: ^2.1.1
+  google_sign_in: ^7.2.0
+  cloud_firestore: ^6.0.3
+  introduction_screen: ^4.0.0
 
 
   

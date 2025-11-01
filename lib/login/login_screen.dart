@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-        
+
             children: [
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
               Center(
@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-        
+
               Text(
                 "Welcome back",
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                         //     return "enter your valid email";
                         // },
                         controller: controller.emailcontroller,
-        
+
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.red),
                           ),
-        
+
                           hintText: "Enter your email",
                         ),
                       ),
@@ -90,10 +90,11 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.06,
                       width: MediaQuery.sizeOf(context).width * 0.8,
-        
+
                       child: ElevatedButton(
                         onPressed: () {
-                          controller.onlogin();
+                          if (controller.onlogin() == true) return;
+                          controller.login();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent.shade700,
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-        
+
               InkWell(
                 onTap: () {
                   Get.to(RegisterPage());
@@ -140,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
-        
+
               RichText(
                 text: TextSpan(
                   text: "Already have account?Login",
@@ -151,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-        
+
               // SizedBox(height: MediaQuery.sizeOf(context).height*0.06,
               //    width: MediaQuery.sizeOf(context).width*0.8,
               //   child: OutlinedButton.icon(onPressed: (){}, label: Text("Continue with Google"),icon: SizedBox(width: MediaQuery.sizeOf(context).width*0.1,

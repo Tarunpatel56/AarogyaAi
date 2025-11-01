@@ -1,19 +1,30 @@
+import 'dart:developer';
+
+import 'package:aarogya/login/login_controler.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key); 
+
+
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+    
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
+     final LoginControler controller = Get.find();
+
+  GetStorage box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
+   var isLogin = box.read('isLoagin');
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -31,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 8),
             const Text(
-              'AarogyaAI',
+              "aarogy",
               style: TextStyle(
                 color: Colors.black87,
                 fontSize: 20,
@@ -94,10 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(height: 4),
                         Text(
                           'Edit your profile',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                       ],
                     ),
@@ -188,10 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: 4),
                     Text(
                       'No Internet Needed',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 12),
                     ),
                   ],
                 ),
@@ -200,8 +205,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    
-      
     );
   }
 
@@ -242,10 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
             ),
@@ -256,11 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 28,
-            ),
+            child: Icon(icon, color: color, size: 28),
           ),
         ],
       ),

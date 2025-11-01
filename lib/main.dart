@@ -1,21 +1,20 @@
 import 'package:aarogya/firebase_options.dart';
 import 'package:aarogya/login/login_screen.dart';
+import 'package:aarogya/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-
-
-
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await GetStorage.init();
   runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
- MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -40,8 +39,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }
-

@@ -69,7 +69,10 @@ class RegisterPage extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.06,
                 width: MediaQuery.sizeOf(context).width * 0.8,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (controller.onReg()==true) return;
+                    controller.createAccount();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent.shade700,
                   ),
@@ -80,14 +83,19 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
-        
+
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.06,
                 width: MediaQuery.sizeOf(context).width * 0.8,
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.googleLogin();
+                  },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blueAccent.shade700, width: 3),
+                    side: BorderSide(
+                      color: Colors.blueAccent.shade700,
+                      width: 3,
+                    ),
                   ),
                   label: Text(
                     "Continue with Google",
@@ -102,14 +110,17 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-        
+
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.06,
                 width: MediaQuery.sizeOf(context).width * 0.8,
                 child: OutlinedButton.icon(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blueAccent.shade700, width: 3),
+                    side: BorderSide(
+                      color: Colors.blueAccent.shade700,
+                      width: 3,
+                    ),
                   ),
                   label: Text(
                     "Continue with Apple",
