@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-     final LoginControler controller = Get.find();
+    //  final LoginControler controller = Get.find();
 
   GetStorage box = GetStorage();
 

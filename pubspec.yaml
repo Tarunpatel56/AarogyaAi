@@ -44,6 +44,8 @@ dependencies:
   google_sign_in: ^7.2.0
   cloud_firestore: ^6.0.3
   introduction_screen: ^4.0.0
+  image_picker: ^1.2.0
+  percent_indicator: ^4.2.5
 
 
   

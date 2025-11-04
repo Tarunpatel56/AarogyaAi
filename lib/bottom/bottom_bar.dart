@@ -1,4 +1,5 @@
 import 'package:aarogya/home/home_page.dart';
+import 'package:aarogya/medicine/medicine_analyzer.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_botton_navigation/animated_botton_navigation.dart';
 import 'package:awesome_drawer_bar/awesome_drawer_bar.dart';
@@ -11,16 +12,15 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-    final _drawerController = AwesomeDrawerBarController();
-      int _currentIndex = 0;
+  final _drawerController = AwesomeDrawerBarController();
+  int _currentIndex = 0;
 
   final List<Widget> _pages = [
     Center(child: HomeScreen()),
-    Center(child: Text("add")),
+    Center(child: MedicineAnalyzer()),
     Center(child: Text("add")),
     Center(child: Text("add")),
   ];
-  
 
   @override
   Widget build(BuildContext context) {

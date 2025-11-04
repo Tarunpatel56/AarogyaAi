@@ -39,6 +39,11 @@ class LoginControler extends GetxController {
       return;
     }
 
+    box.write('isLogin', true);
+
+    final bool isLogin = box.read("isLogin") ?? false;
+
+    print(isLogin);
     // if (formkey.currentState!.validate()) {
     // } else {
     //   Get.showSnackbar(
