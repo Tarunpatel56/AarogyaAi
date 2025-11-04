@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 8),
             const Text(
-              "aarogy",
+              "AarogyaAI",
               style: TextStyle(
                 color: Colors.black87,
                 fontSize: 20,
@@ -205,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+     floatingActionButton: IconButton(onPressed: (){}, icon: Icon(Icons.call)),
     );
   }
 

@@ -31,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
         indicatorSpaceBotton: 25,
         icons: [
           Icons.home,
-          Icons.directions_car_filled,
+          Icons.medical_services_outlined,
           Icons.person,
           Icons.person,
         ],

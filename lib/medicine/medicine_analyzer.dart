@@ -50,7 +50,7 @@ class _MedicineAnalyzerState extends State<MedicineAnalyzer> {
                       : FileImage(File(_image!.path)),
                   fit: BoxFit.cover,
                 ),
-              ),
+              ), 
 
               child: Align(
                 alignment: Alignment.bottomCenter,
