@@ -17,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
 
   final List<Widget> _pages = [
     Center(child: HomeScreen()),
-    Center(child: MedicineAnalyzer()),
+    Center(child: MedicineScanView()),
     Center(child: Text("add")),
     Center(child: Text("add")),
   ];

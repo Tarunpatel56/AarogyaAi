@@ -1,110 +1,182 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:percent_indicator/percent_indicator.dart'; // ✅ new import
+import '../controller/medicine_controller.dart';
+import 'medicin_controler.dart';
 
-import '../utils/text_utils.dart';
-
-class MedicineAnalyzer extends StatefulWidget {
-  MedicineAnalyzer({super.key});
-
-  @override
-  State<MedicineAnalyzer> createState() => _MedicineAnalyzerState();
-}
-
-class _MedicineAnalyzerState extends State<MedicineAnalyzer> {
-  final _picker = ImagePicker();
-
-  XFile? _image;
-
-  pickImage(bool isCamera) async {
-    final pickedFile = await _picker.pickImage(
-      source: isCamera ? ImageSource.camera : ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        _image = pickedFile;
-      });
-    }
-  }
+class MedicineScanView extends StatelessWidget {
+  final MedicineController controller = Get.put(MedicineController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Medicine Analyzer"))),
-      body: SingleChildScrollView(
-        child: Column(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text("Medicine Analyzer"),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+      body: Obx(
+        () => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // 🔹 Camera Frame Section
             Container(
-              margin: const EdgeInsets.symmetric(horizontal:  20),
-            
-              height: Get.height * 0.35,
+              width: 260,
+              height: 280,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: _image == null
-                      ? AssetImage("assets/medicin.jpg")
-                      : FileImage(File(_image!.path)),
-                  fit: BoxFit.cover,
-                ),
-              ), 
-
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        pickImage(true);
-                      },
-                      icon: Icon(Icons.camera_alt_outlined, size: 45),
-                    ),
-
-                    IconButton(
-                      onPressed: () {
-                        pickImage(false);
-                      },
-                      icon: Icon(Icons.photo_library_outlined, size: 45),
-                    ),
-                  ],
+                border: Border.all(color: Colors.tealAccent, width: 2),
+                borderRadius: BorderRadius.circular(16),
+                color: Colors.transparent,
+              ),
+              child: const Center(
+                child: Text(
+                  "Align medicine label",
+                  style: TextStyle(
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),
-
-            Container(
-              margin: const EdgeInsets.all(20),
-               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              // height: Get.height / 2,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade200,
-              ),
+           
+        
+            // 🔹 Capture Buttons Section
+            Expanded(
+              flex: 2,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: Get.height * 0.02),
-                  Text(
-                    "Analysis Results",
-                    style: AppTextStyles.headingTextStyle,
+                  // Camera and Gallery buttons row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Camera Button
+                      InkWell(
+                        onTap: controller.scanAndAnalyze,
+                        borderRadius: BorderRadius.circular(50),
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            color: Colors.blueAccent,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.camera_alt_rounded,
+                            color: Colors.white,
+                            size: 38,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      // Gallery Button (future use)
+                      InkWell(
+                        onTap: () {
+                          // TODO: Implement gallery import if needed
+                        },
+                        borderRadius: BorderRadius.circular(50),
+                        child: Container(
+                          width: 65,
+                          height: 65,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey.shade400),
+                          ),
+                          child: const Icon(
+                            Icons.photo_library_rounded,
+                            color: Colors.black54,
+                            size: 28,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: Get.height * 0.03),
-            
-                  CircularPercentIndicator(
-                    radius: 90,
-                    lineWidth: 20,
-                    percent: 0.4,
-                    progressBorderColor: Colors.deepPurple,
-                    backgroundColor: Colors.deepPurple.shade100,
-                    progressColor: Colors.yellow,
-            
-                    circularStrokeCap: CircularStrokeCap.round,
-                    center: Text("40%"),
+        
+                  const SizedBox(height: 30),
+        
+                  // 🔹 Analysis Section
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.all(18),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade300,
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: const Offset(2, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Analysis Results",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                          
+                        // 🔹 New Animated Progress Loader
+                        controller.isAnalyzing.value
+                            ? Column(
+                                children: [
+                                  CircularPercentIndicator(
+                                    radius: 40.0,
+                                    lineWidth: 8.0,
+                                    animation: true,
+                                    percent: controller.progressValue.value.clamp(0.0, 1.0),
+                                    center: Text(
+                                      "${(controller.progressValue.value * 100).toInt()}%",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
+                                    ),
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: Colors.blueAccent,
+                                    backgroundColor: Colors.blue.shade50,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    controller.statusMessage.value,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(
+                                controller.statusMessage.value,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                          
+                        const SizedBox(height: 14),
+                        const Text(
+                          "Disclaimer: For informational purposes only.\nConsult a doctor or pharmacist.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text("Analying"),
                 ],
               ),
             ),
