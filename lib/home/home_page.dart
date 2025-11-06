@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:aarogya/ai_physio/views/ai_pose_trainer_screen.dart'
+    if (dart.library.html) 'package:aarogya/ai_physio/views/ai_pose_trainer_screen_stub.dart'
+    as physio;
+import 'package:aarogya/medicine/medicine_analyzer.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({Key? key}) : super(key: key); 
@@ -137,6 +141,40 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
+                  // First row: Medicine Analyzer and AI Physiotherapist side-by-side
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => MedicineScanView());
+                          },
+                          child: _buildActionCard(
+                            title: 'Medicine Analyzer',
+                            subtitle: 'Scan and analyze medicines',
+                            icon: Icons.medical_services_outlined,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => physio.AIPoseTrainerScreen());
+                          },
+                          child: _buildActionCard(
+                            title: 'AI Physiotherapist',
+                            subtitle: 'Check your exercise form with AI',
+                            icon: Icons.camera_alt,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  // Additional actions below if needed
                   _buildActionCard(
                     title: 'Symptom Check',
                     subtitle: 'Check your symptoms with our AI',
