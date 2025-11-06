@@ -3,6 +3,9 @@ import 'package:aarogya/medicine/medicine_analyzer.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_botton_navigation/animated_botton_navigation.dart';
 import 'package:awesome_drawer_bar/awesome_drawer_bar.dart';
+import 'package:aarogya/ai_physio/views/ai_pose_trainer_screen.dart'
+    if (dart.library.html) 'package:aarogya/ai_physio/views/ai_pose_trainer_screen_stub.dart'
+    as physio;
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -18,8 +21,8 @@ class _BottomBarState extends State<BottomBar> {
   final List<Widget> _pages = [
     Center(child: HomeScreen()),
     Center(child: MedicineScanView()),
-    Center(child: Text("add")),
-    Center(child: Text("add")),
+    Center(child: physio.AIPoseTrainerScreen()),
+    Center(child: Text("Profile")),
   ];
 
   @override
@@ -32,7 +35,7 @@ class _BottomBarState extends State<BottomBar> {
         icons: [
           Icons.home,
           Icons.medical_services_outlined,
-          Icons.person,
+          Icons.fitness_center,
           Icons.person,
         ],
         currentIndex: _currentIndex,

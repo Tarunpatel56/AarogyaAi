@@ -50,6 +50,18 @@ dependencies:
   flutter_tts: ^4.2.3
   google_mlkit_translation: ^0.13.0
   google_mlkit_text_recognition: ^0.15.0
+  camera: ^0.10.5+9 
+  # For running the TFLite model
+  tflite_flutter: ^0.12.1
+  # For text-to-speech feedback
+  
+  # For vector math (angle calculation)
+  vector_math: ^2.1.4
+  # For state management (you already have get, but provider is good too)
+  provider: ^6.1.1 
+  # For drawing the skeleton
+  flutter_painter: ^1.0.1
+  image: ^4.1.7
 
 
   
@@ -102,6 +114,7 @@ flutter:
   assets:
     - assets/
     - assets/medicines.db
+    - assets/yolov8n-pose.tflite
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
