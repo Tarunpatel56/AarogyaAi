@@ -1,3 +1,4 @@
+import 'package:aarogya/medicine/medicine_detail_view.dart';
 import 'package:aarogya/medicine/medicine_model.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,61 +44,141 @@ class MedicineController extends GetxController {
   }
 
   Future<void> scanAndAnalyze() async {
-    try {
-      statusMessage.value = "Opening camera...";
-      isAnalyzing.value = true;
+  try {
+    // Reset
+    progressValue.value = 0.0;
+    statusMessage.value = "Opening camera...";
+    isAnalyzing.value = true;
 
-      final XFile? file = await _picker.pickImage(source: ImageSource.camera);
-      if (file == null) {
-        statusMessage.value = "No image selected.";
-        isAnalyzing.value = false;
-        return;
-      }
-
-      final inputImage = InputImage.fromFilePath(file.path);
-      statusMessage.value = "Reading text from image...";
-      final recognized = await _textRecognizer.processImage(inputImage);
-      String ocrText = recognized.text;
-
-      if (ocrText.isEmpty) {
-        statusMessage.value = "No text found.";
-        await _speak("कोई टेक्स्ट नहीं मिला।");
-        isAnalyzing.value = false;
-        return;
-      }
-
-      statusMessage.value = "Searching database for a match...";
-      final result = await _dbHelper.searchMedicine(ocrText);
-
-      if (result != null) {
-        MedicineModel medicine = MedicineModel.fromMap(result);
-        foundMedicine.value = medicine;
-
-        statusMessage.value = "Found: ${medicine.medicineName}";
-
-        statusMessage.value = "Translating to Hindi...";
-        String usageHi = await _translator.translateText(medicine.usageInfo);
-        String dosageHi = await _translator.translateText(medicine.dosageInfo);
-        String warningHi = await _translator.translateText(medicine.warningInfo);
-
-        await _speakDetails(
-          medicine.medicineName,
-          usageHi,
-          dosageHi,
-          warningHi,
-        );
-
-        Get.toNamed('/medicineDetails');
-      } else {
-        statusMessage.value = "Medicine not recognized.";
-        await _speak("दवा नहीं पहचानी गई।");
-      }
-    } catch (e) {
-      statusMessage.value = "Error: $e";
-    } finally {
+    // --- Step 1: Open Camera ---
+    progressValue.value = 0.1;
+    final XFile? file = await _picker.pickImage(source: ImageSource.camera);
+    if (file == null) {
+      statusMessage.value = "No image selected.";
       isAnalyzing.value = false;
+      progressValue.value = 0.0;
+      return;
     }
+
+    // --- Step 2: Convert to InputImage ---
+    progressValue.value = 0.3;
+    statusMessage.value = "Reading text from image...";
+    final inputImage = InputImage.fromFilePath(file.path);
+
+    // --- Step 3: OCR Recognition ---
+    progressValue.value = 0.5;
+    final recognized = await _textRecognizer.processImage(inputImage);
+    String ocrText = recognized.text;
+
+    if (ocrText.isEmpty) {
+      statusMessage.value = "No text found.";
+      await _speak("कोई टेक्स्ट नहीं मिला।");
+      isAnalyzing.value = false;
+      progressValue.value = 0.0;
+      return;
+    }
+
+    // --- Step 4: Database Search ---
+    progressValue.value = 0.7;
+    statusMessage.value = "Searching database for a match...";
+    final result = await _dbHelper.searchMedicine(ocrText);
+
+    if (result != null) {
+      MedicineModel medicine = MedicineModel.fromMap(result);
+      foundMedicine.value = medicine;
+
+      statusMessage.value = "Found: ${medicine.medicineName}";
+
+      // --- Step 5: Translation ---
+      progressValue.value = 0.9;
+      statusMessage.value = "Translating details to Hindi...";
+
+      String usageHi = await _translator.translateText(medicine.usageInfo);
+      String dosageHi = await _translator.translateText(medicine.dosageInfo);
+      String warningHi = await _translator.translateText(medicine.warningInfo);
+
+      await _speakDetails(
+        medicine.medicineName,
+        usageHi,
+        dosageHi,
+        warningHi,
+      );
+
+      // --- Step 6: Done ---
+      progressValue.value = 1.0;
+      statusMessage.value = "Analysis Complete ✅";
+
+      Get.to(() => MedicineDetailView(imagePath: file.path));
+    } else {
+      statusMessage.value = "Medicine not recognized.";
+      await _speak("दवा नहीं पहचानी गई।");
+      progressValue.value = 0.0;
+    }
+  } catch (e) {
+    statusMessage.value = "Error: $e";
+    progressValue.value = 0.0;
+  } finally {
+    isAnalyzing.value = false;
   }
+}
+
+
+  // Future<void> scanAndAnalyze() async {
+  //   try {
+  //     statusMessage.value = "Opening camera...";
+  //     isAnalyzing.value = true;
+
+  //     final XFile? file = await _picker.pickImage(source: ImageSource.camera);
+  //     if (file == null) {
+  //       statusMessage.value = "No image selected.";
+  //       isAnalyzing.value = false;
+  //       return;
+  //     }
+
+  //     final inputImage = InputImage.fromFilePath(file.path);
+  //     statusMessage.value = "Reading text from image...";
+  //     final recognized = await _textRecognizer.processImage(inputImage);
+  //     String ocrText = recognized.text;
+
+  //     if (ocrText.isEmpty) {
+  //       statusMessage.value = "No text found.";
+  //       await _speak("कोई टेक्स्ट नहीं मिला।");
+  //       isAnalyzing.value = false;
+  //       return;
+  //     }
+
+  //     statusMessage.value = "Searching database for a match...";
+  //     final result = await _dbHelper.searchMedicine(ocrText);
+
+  //     if (result != null) {
+  //       MedicineModel medicine = MedicineModel.fromMap(result);
+  //       foundMedicine.value = medicine;
+
+  //       statusMessage.value = "Found: ${medicine.medicineName}";
+
+  //       statusMessage.value = "Translating to Hindi...";
+  //       String usageHi = await _translator.translateText(medicine.usageInfo);
+  //       String dosageHi = await _translator.translateText(medicine.dosageInfo);
+  //       String warningHi = await _translator.translateText(medicine.warningInfo);
+
+  //       await _speakDetails(
+  //         medicine.medicineName,
+  //         usageHi,
+  //         dosageHi,
+  //         warningHi,
+  //       );
+
+  //       Get.to(MedicineDetailView());
+  //     } else {
+  //       statusMessage.value = "Medicine not recognized.";
+  //       await _speak("दवा नहीं पहचानी गई।");
+  //     }
+  //   } catch (e) {
+  //     statusMessage.value = "Error: $e";
+  //   } finally {
+  //     isAnalyzing.value = false;
+  //   }
+  // }
 
   Future<void> _speak(String text) async {
     await _flutterTts.speak(text);

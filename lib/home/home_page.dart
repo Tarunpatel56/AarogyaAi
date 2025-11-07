@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+
 import 'package:aarogya/login/login_controler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:aarogya/features/image_diagnostic_page.dart'; // Adjust path as needed
+
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({Key? key}) : super(key: key); 
@@ -137,11 +140,17 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  _buildActionCard(
-                    title: 'Symptom Check',
-                    subtitle: 'Check your symptoms with our AI',
-                    icon: Icons.health_and_safety_outlined,
-                    color: Colors.blue,
+                  InkWell(onTap: () {
+                     Get.to(() => ImageDiagnosticPage());
+
+                  }
+,
+                    child: _buildActionCard(
+                      title: 'Symptom Check',
+                      subtitle: 'Check your symptoms with our AI',
+                      icon: Icons.health_and_safety_outlined,
+                      color: Colors.blue,
+                     ),
                   ),
                   const SizedBox(height: 12),
                   _buildActionCard(
@@ -149,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: 'Log and track your vital signs',
                     icon: Icons.monitor_heart_outlined,
                     color: Colors.blue,
-                  ),
-                ],
+                  ),                ],
               ),
             ),
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart'; // ✅ new import
-import '../controller/medicine_controller.dart';
+
 import 'medicin_controler.dart';
 
 class MedicineScanView extends StatelessWidget {
@@ -19,35 +19,32 @@ class MedicineScanView extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       body: Obx(
-        () => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // 🔹 Camera Frame Section
-            Container(
-              width: 260,
-              height: 280,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.tealAccent, width: 2),
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.transparent,
-              ),
-              child: const Center(
-                child: Text(
-                  "Align medicine label",
-                  style: TextStyle(
-                    color: Colors.teal,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+        () => SingleChildScrollView(
+          child: Column(
+            spacing: 8.0,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 260,
+                height: 280,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.tealAccent, width: 2),
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.transparent,
+                ),
+                child: const Center(
+                  child: Text(
+                    "Align medicine label",
+                    style: TextStyle(
+                      color: Colors.teal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),
-            ),
-           
-        
-            // 🔹 Capture Buttons Section
-            Expanded(
-              flex: 2,
-              child: Column(
+
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Camera and Gallery buttons row
@@ -96,9 +93,9 @@ class MedicineScanView extends StatelessWidget {
                       ),
                     ],
                   ),
-        
+
                   const SizedBox(height: 30),
-        
+
                   // 🔹 Analysis Section
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -125,7 +122,7 @@ class MedicineScanView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                          
+
                         // 🔹 New Animated Progress Loader
                         controller.isAnalyzing.value
                             ? Column(
@@ -134,12 +131,14 @@ class MedicineScanView extends StatelessWidget {
                                     radius: 40.0,
                                     lineWidth: 8.0,
                                     animation: true,
-                                    percent: controller.progressValue.value.clamp(0.0, 1.0),
+                                    percent: controller.progressValue.value
+                                        .clamp(0.0, 1.0),
                                     center: Text(
                                       "${(controller.progressValue.value * 100).toInt()}%",
                                       style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20.0),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0,
+                                      ),
                                     ),
                                     circularStrokeCap: CircularStrokeCap.round,
                                     progressColor: Colors.blueAccent,
@@ -164,7 +163,7 @@ class MedicineScanView extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                          
+
                         const SizedBox(height: 14),
                         const Text(
                           "Disclaimer: For informational purposes only.\nConsult a doctor or pharmacist.",
@@ -179,8 +178,8 @@ class MedicineScanView extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

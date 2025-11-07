@@ -50,6 +50,14 @@ dependencies:
   flutter_tts: ^4.2.3
   google_mlkit_translation: ^0.13.0
   google_mlkit_text_recognition: ^0.15.0
+  tflite_flutter: ^0.12.1
+  image: ^4.5.4
+  rename: ^3.1.0
+
+
+
+
+  
 
 
   
@@ -80,6 +88,7 @@ flutter_launcher_icons:
     generate: true
     image_path: "path/to/image.png"
 
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -102,6 +111,14 @@ flutter:
   assets:
     - assets/
     - assets/medicines.db
+    - assets/models/mri_classifier.tflite
+    - assets/models/mri_labels.txt
+    - assets/models/skin_classifier.tflite
+    - assets/models/skin_labels.txt
+    - assets/models/xray_classifier.tflite
+    - assets/models/xray_labels.txt
+    
+ 
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

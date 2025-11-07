@@ -449,7 +449,7 @@ packages:
     source: hosted
     version: "4.1.2"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       sha256: "4e973fcf4caae1a4be2fa0a13157aa38a8f9cb049db6529aa00b4d71abc4d928"
@@ -560,6 +560,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: a7967e31b703831a893bbc3c3dd11db08126fe5f369b5c648a36f821979f5be3
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
   matcher:
     dependency: transitive
     description:
@@ -688,6 +696,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.3"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
+  rename:
+    dependency: "direct main"
+    description:
+      name: rename
+      sha256: da5f4d67f8c68f066ad04edfd6585495dbe595f2baf3b1999eb6af1805d79539
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -789,6 +813,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
+  tflite_flutter:
+    dependency: "direct main"
+    description:
+      name: tflite_flutter
+      sha256: "0bba9040d8decda0960d7abf8eabf32243bf092bc7d0084e8e19681866b0bdbe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.12.1"
   typed_data:
     dependency: transitive
     description:

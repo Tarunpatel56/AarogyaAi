@@ -42,24 +42,49 @@ class DatabaseHelper {
   }
 
   // This is the main search function
-  Future<Map<String, dynamic>?> searchMedicine(String ocrText) async {
-    final db = await instance.database;
-    final List<Map<String, dynamic>> allMedicines = await db.query('medicines');
+  // Future<Map<String, dynamic>?> searchMedicine(String ocrText) async {
+  //   final db = await instance.database;
+  //   final List<Map<String, dynamic>> allMedicines = await db.query('medicines');
     
-    String searchText = ocrText.toLowerCase().replaceAll('\n', ' ');
+  //   String searchText = ocrText.toLowerCase().replaceAll('\n', ' ');
 
-    // Loop through our DB and find the first match
-    for (var medicine in allMedicines) {
-      String identifier = (medicine['identifier_text'] as String? ?? '').toLowerCase();
+  //   // Loop through our DB and find the first match
+  //   for (var medicine in allMedicines) {
+  //     String identifier = (medicine['identifier_text'] as String? ?? '').toLowerCase();
       
-      // Check if the text from the image CONTAINS a known medicine identifier
-      if (identifier.isNotEmpty && searchText.contains(identifier)) {
-        print("Match found: $identifier");
-        return medicine; // Return the full medicine details
-      }
-    }
+  //     // Check if the text from the image CONTAINS a known medicine identifier
+  //     if (identifier.isNotEmpty && searchText.contains(identifier)) {
+  //       print("Match found: $identifier");
+  //       return medicine; // Return the full medicine details
+  //     }
+  //   }
     
+  //   print("No match found.");
+  //   return null; // No match
+  // }
+
+
+
+Future<Map<String, dynamic>?> searchMedicine(String ocrText) async {
+  final db = await instance.database;
+
+  // Preprocess OCR text
+  String searchText = ocrText.toLowerCase().replaceAll('\n', ' ');
+
+  // Query the database directly using LIKE condition
+  final List<Map<String, dynamic>> result = await db.query(
+    'medicines',
+    where: "LOWER(?) LIKE '%' || LOWER(identifier_text) || '%'",
+    whereArgs: [searchText],
+    limit: 1, // we only need the first match
+  );
+
+  if (result.isNotEmpty) {
+    print("Match found: ${result.first['identifier_text']}");
+    return result.first;
+  } else {
     print("No match found.");
-    return null; // No match
+    return null;
   }
+}
 }

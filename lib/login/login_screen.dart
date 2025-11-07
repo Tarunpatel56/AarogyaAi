@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:aarogya/bottom/bottom_bar.dart';
+import 'package:aarogya/home/home_page.dart';
 import 'package:aarogya/login/forgot_screen.dart';
 import 'package:aarogya/login/login_controler.dart';
 import 'package:aarogya/login/register_page.dart';
@@ -142,13 +144,18 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
 
-              RichText(
-                text: TextSpan(
-                  text: "Already have account?Login",
-                  style: TextStyle(
-                    color: Colors.blueAccent.shade700,
-                    decoration: TextDecoration.underline,
-                    fontSize: 18,
+              InkWell(
+                onTap: () {
+                  Get.to(BottomBar());
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: "Already have account?Login",
+                    style: TextStyle(
+                      color: Colors.blueAccent.shade700,
+                      decoration: TextDecoration.underline,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),

@@ -22,7 +22,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         pages: [
           PageViewModel(
             title: '',
-            bodyWidget: SizedBox(height: MediaQuery.sizeOf(context).height*0.2,
+            bodyWidget: SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.02,
 
               child: SingleChildScrollView(
                 child: Column(
@@ -94,7 +95,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         onDone: () {
           Get.off(LoginScreen());
         },
-        onSkip: () { Get.off(LoginScreen());},
+        onSkip: () {
+          Get.off(LoginScreen());
+        },
         dotsDecorator: DotsDecorator(
           size: const Size.square(10.0),
           activeSize: const Size(20.0, 10.0),

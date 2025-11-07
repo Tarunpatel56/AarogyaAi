@@ -1,0 +1,5 @@
+Bacterial Pneumonia
+Corona Virus
+Normal
+Tuberculosis
+Viral Pneumonia

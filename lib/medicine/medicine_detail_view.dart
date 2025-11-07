@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:aarogya/medicine/medicin_controler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/medicine_controller.dart';
+
 
 class MedicineDetailView extends StatelessWidget {
+    late final String imagePath;
   final MedicineController controller = Get.find();
+   MedicineDetailView({required this.imagePath});
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class MedicineDetailView extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Image.asset("assets/medicine_placeholder.png", height: 120),
+                  Image.file(File(imagePath), height: 120),
                   SizedBox(height: 20),
                   Text(
                     medicine.medicineName,
