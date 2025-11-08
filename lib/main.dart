@@ -1,3 +1,4 @@
+import 'package:aarogya/features/physio_trainer/physio_trainer_controller.dart';
 import 'package:aarogya/firebase_options.dart';
 import 'package:aarogya/login/login_screen.dart';
 import 'package:aarogya/medicine/medicine_analyzer.dart';
@@ -5,6 +6,7 @@ import 'package:aarogya/onboarding/onboarding_screen.dart';
 import 'package:aarogya/onboarding/splace_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -40,10 +42,10 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),debugShowCheckedModeBanner: false,
-       initialRoute: '/scanMedicine',
- 
+      ),
+      debugShowCheckedModeBanner: false,
       home: SplaceScreen(),
+   
             // home: MedicineAnalyzer(),
 
     );
